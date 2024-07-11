@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: Nes
+Build-Jdk: 17.0.9
+Implementation-Title: LoginSecurityTutorial
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.cristianruizblog
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/LoginSecurityTutorial
+Created-By: Maven Integration for Eclipse
+
