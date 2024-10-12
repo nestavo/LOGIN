@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+              .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+        .btn-vv {
+            background-color: green; /* Verde */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .btn-extravagante:hover {
+            background-color: #FF4500; /* Naranja más oscuro */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+              .btn-extra {
+            background-color: blue; /* Naranja intenso */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .btn-extravagante:hover {
+            background-color: #FF4500; /* Naranja más oscuro */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+    
+              .btn-con {
+            background-color: red; 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .btn-extravagante:hover {
+            background-color: aqua; /* Naranja más oscuro */
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+        
+          #error-username {
+        color: red;
+        font-size: 15px;
+        display: none; /* El mensaje está oculto inicialmente */
+    }
+          #success-message {
+    background-color: #28a745; /* Color verde */
+    color: white; /* Color del texto */
+    padding: 30px; /* Espaciado interno */
+    border-radius: 38px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+    margin: 20px; /* Margen alrededor del contenedor */
+    display: none;  /*El mensaje está oculto inicialmente */
+}
+
+
+    
+    </style>
+</head>
+<body>
+
+
+    <div class="container mt-5">
+        <h2>Iniciar Sesión</h2>
+   <!-- Mensaje de error de inicio de sesión -->
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+                <div th:if="${success}" class="alert alert-success">
+          <p th:text="${success}"></p>
+</div>
+     
+
+
+        <!-- Formulario de inicio de sesión -->
+        <form th:action="@{/login}" method="post" onsubmit="return validarFormulario()">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario o Email:</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Nombre de usuario o Email">
+<span id="error-username" class="text-danger" style="display:none;">Por favor, ingresa tu nombre de usuario o Email.</span>
+                
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña">
+                <span id="error-password" class="text-danger" style="display:none;">Por favor, ingresa tu Contraseña.</span>
+            </div>
+            <button type="submit" class="btn btn-vv">Iniciar Sesión</button>
+              <a href="/registro">
+            <button type="button" class="btn btn-extra">Registrate Gratis</button>
+        </a>
+               <a href="/recuperarcontra">
+            <button type="button" class="btn btn-con">Has olvidado la contraseña?</button>
+        </a>
+        </form>
+    </div>
+    <script>
+    function validarFormulario() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        let errorUsername = document.getElementById("error-username"); // Obtén el elemento del mensaje de error
+        let errorPassword = document.getElementById("error-password");
+        
+        if (username === "") {
+            errorUsername.style.display = "block"; // Muestra el mensaje de error
+            return false; // Evita que el formulario se envíe
+        } else {
+            errorUsername.style.display = "none"; // Oculta el mensaje de error
+        }
+
+        if (password === "") {
+            errorPassword.style.display = "block"; // Muestra el mensaje de error
+            return false; // Evita que el formulario se envíe
+        } else {
+            errorPasssword.style.display = "none"; // Oculta el mensaje de error
+        }
+
+        return true; // Permite que el formulario se envíe
+    }
+
+    </script>
+
+    
+</body>
+</html>

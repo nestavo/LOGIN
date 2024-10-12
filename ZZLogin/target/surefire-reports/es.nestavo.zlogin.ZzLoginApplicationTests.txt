@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: es.nestavo.zlogin.ZzLoginApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.573 s -- in es.nestavo.zlogin.ZzLoginApplicationTests

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            color: #555;
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .btn-register {
+            background-color: #007bff; /* Azul Bootstrap */
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .btn-register:hover {
+            background-color: #0069d9; /* Azul más oscuro */
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        #passwordMatchMessage {
+            margin-top: 5px;
+            font-size: 14px;
+        }
+    </style>
+  
+    <script>
+        function checkPasswordMatch() {
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirmPassword').value;
+            var message = document.getElementById('passwordMatchMessage');
+
+            if (password === confirmPassword) {
+                message.textContent = "Las contraseñas coinciden.";
+                message.style.color = "green";
+            } else {
+                message.textContent = "Las contraseñas no coinciden.";
+                message.style.color = "red";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Registro de Usuario</h2>
+
+        <!-- Mensajes de error -->
+        <div th:if="${error}" class="alert alert-danger">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- Mensajes de éxito -->
+        <div th:if="${success}" class="alert alert-success">
+            <p th:text="${success}"></p>
+        </div>
+
+        <!-- Formulario de registro -->
+        <form th:action="@{/registro}" th:object="${usuario}" method="post">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" th:field="*{username}" class="form-control" id="username" placeholder="Nombre de usuario">
+              <p th:if="${#fields.hasErrors('username')}" class="text-danger" th:errors="*{username}">Nombre de usuario inválido</p>
+               
+                 <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" th:field="*{email}" placeholder="Email" class="form-control" />
+            
+            <!-- Muestra el error si el campo está vacío o el formato es incorrecto -->
+            <p th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}">El email es inválido</p></div>
+               
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" th:field="*{password}" class="form-control" id="password" placeholder="Contraseña" onkeyup="checkPasswordMatch()">
+               <p th:if="${#fields.hasErrors('password')}" class="text-danger" th:errors="*{password}">Contraseña inválida</p>
+     
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirmar Contraseña:</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar Contraseña" onkeyup="checkPasswordMatch()">
+            </div>
+            <div id="passwordMatchMessage"></div> 
+            <div class="form-group">
+                <label for="nombreEmpresa">Nombre de Empresa:</label>
+                <input type="text" th:field="*{nombreEmpresa}" class="form-control" id="nombreEmpresa" placeholder="Nombre de la Empresa">
+              <p th:if="${#fields.hasErrors('nombreEmpresa')}" class="text-danger" th:errors="*{nombreEmpresa}">Nombre no válido</p>
+               
+               </div> 
+                   <div class="form-group">
+                <label for="direccion">Direccion:</label>
+                <input type="text" th:field="*{direccion}" class="form-control" id="direccion" placeholder="Direccion">
+              <p th:if="${#fields.hasErrors('direccion')}" class="text-danger" th:errors="*{direccion}">Direccion no válido</p>
+               
+               </div> 
+            <div>
+            
+                <button type="submit" class="btn btn-register">Registrarse</button>
+                <a href="/login">
+                    <button type="button" class="btn btn-outline-success">Ya estas registrado, Logeate</button>
+                </a>
+            </div>
+        </form>
+    </div> 
+</body>
+</html>
